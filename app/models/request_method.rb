@@ -1,0 +1,2 @@
+class RequestMethod < ApplicationRecord
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170926200844) do
+ActiveRecord::Schema.define(version: 20170926204345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,32 @@ ActiveRecord::Schema.define(version: 20170926200844) do
     t.index ["team_id"], name: "index_apps_on_team_id", using: :btree
   end
 
+  create_table "payloads", force: :cascade do |t|
+    t.integer  "app_id",                 null: false
+    t.text     "name",                   null: false
+    t.text     "description"
+    t.text     "request_url",            null: false
+    t.integer  "request_method_id",      null: false
+    t.integer  "request_environment_id", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["app_id"], name: "index_payloads_on_app_id", using: :btree
+    t.index ["request_environment_id"], name: "index_payloads_on_request_environment_id", using: :btree
+    t.index ["request_method_id"], name: "index_payloads_on_request_method_id", using: :btree
+  end
+
+  create_table "request_environments", force: :cascade do |t|
+    t.text     "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "request_methods", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "teams", force: :cascade do |t|
     t.text     "name",       null: false
     t.datetime "created_at", null: false
@@ -31,4 +57,7 @@ ActiveRecord::Schema.define(version: 20170926200844) do
   end
 
   add_foreign_key "apps", "teams"
+  add_foreign_key "payloads", "apps"
+  add_foreign_key "payloads", "request_environments"
+  add_foreign_key "payloads", "request_methods"
 end

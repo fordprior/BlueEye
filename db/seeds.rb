@@ -1,7 +1,14 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+team = Team.create!(name: "Team")
+app = App.create!(team: team, name: "Sample App", repo_url: "https://github.com/JLHOLM/BlueEye")
+
+request_environment = RequestEnvironment.create!(name: "development")
+request_method = RequestMethod.create!(name: "POST")
+
+payload = Payload.create!(
+  app: app,
+  name: "Sample Payload",
+  description: "Sample Description",
+  request_url: "localhost:3000/callback",
+  request_method: request_method,
+  request_environment: request_environment
+)

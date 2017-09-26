@@ -1,0 +1,2 @@
+class RequestEnvironment < ApplicationRecord
+end
