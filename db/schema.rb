@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170926204345) do
+ActiveRecord::Schema.define(version: 20170926205431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 20170926204345) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_apps_on_team_id", using: :btree
+  end
+
+  create_table "payload_bodies", force: :cascade do |t|
+    t.integer  "payload_id", null: false
+    t.text     "key",        null: false
+    t.text     "value",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["payload_id"], name: "index_payload_bodies_on_payload_id", using: :btree
   end
 
   create_table "payloads", force: :cascade do |t|
@@ -57,6 +66,7 @@ ActiveRecord::Schema.define(version: 20170926204345) do
   end
 
   add_foreign_key "apps", "teams"
+  add_foreign_key "payload_bodies", "payloads"
   add_foreign_key "payloads", "apps"
   add_foreign_key "payloads", "request_environments"
   add_foreign_key "payloads", "request_methods"
