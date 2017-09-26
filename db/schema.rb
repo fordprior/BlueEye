@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170926195703) do
+ActiveRecord::Schema.define(version: 20170926200844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "apps", force: :cascade do |t|
+    t.integer  "team_id",    null: false
+    t.text     "name",       null: false
+    t.text     "repo_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_apps_on_team_id", using: :btree
+  end
 
   create_table "teams", force: :cascade do |t|
     t.text     "name",       null: false
@@ -21,4 +30,5 @@ ActiveRecord::Schema.define(version: 20170926195703) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "apps", "teams"
 end
