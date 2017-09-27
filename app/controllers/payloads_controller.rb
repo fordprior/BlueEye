@@ -16,7 +16,30 @@ class PayloadsController < ApplicationController
   private
 
   def payload_params
-    params.require(:payload).permit(:app_id, :request_method_id, :request_environment_id, :name, :description, :request_url,
-                                   request_headers_attributes: [:id, :payload_id, :key, :value, :description, :_destroy])
+    params.require(:payload)
+      .permit(
+        :name,
+        :app_id,
+        :description,
+        :request_url,
+        :request_method_id,
+        :request_environment_id,
+        request_headers_attributes: [
+          :id,
+          :key,
+          :value,
+          :payload_id,
+          :description,
+          :_destroy
+        ],
+        request_bodies_attributes: [
+          :id,
+          :key,
+          :value,
+          :payload_id,
+          :description,
+          :_destroy
+        ]
+      )
   end
 end

@@ -24,6 +24,26 @@ ActiveRecord::Schema.define(version: 20170927002849) do
     t.index ["team_id"], name: "index_apps_on_team_id", using: :btree
   end
 
+  create_table "payload_bodies", force: :cascade do |t|
+    t.integer  "payload_id",  null: false
+    t.text     "key",         null: false
+    t.text     "value",       null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.text     "description"
+    t.index ["payload_id"], name: "index_payload_bodies_on_payload_id", using: :btree
+  end
+
+  create_table "payload_headers", force: :cascade do |t|
+    t.integer  "payload_id",  null: false
+    t.text     "key",         null: false
+    t.text     "value",       null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.text     "description"
+    t.index ["payload_id"], name: "index_payload_headers_on_payload_id", using: :btree
+  end
+
   create_table "payloads", force: :cascade do |t|
     t.integer  "app_id",                 null: false
     t.text     "name",                   null: false
