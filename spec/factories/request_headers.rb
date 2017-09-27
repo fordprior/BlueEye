@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :payload_header do
+  factory :request_header do
     payload nil
     key "MyText"
     value "MyText"
