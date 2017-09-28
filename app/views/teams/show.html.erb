@@ -1,0 +1,9 @@
+<div class="columns">
+  <div clas="column col-8">
+    <h1><%= @team.name %></h1>
+  </div>
+  <% @team.apps.each do |app| %>
+    <%= app.name %>
+    <%= app.repo_url %>
+  <% end %>
+</div>
